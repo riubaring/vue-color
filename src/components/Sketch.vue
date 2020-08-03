@@ -55,6 +55,9 @@
         </div>
       </template>
     </div>
+    <div class="vc-sketch-buttons" v-show="buttonEnabled">
+      <button :class="buttonCss" @click="button_onClick">Done</button>
+    </div>
   </div>
 </template>
 
@@ -97,6 +100,14 @@ export default {
     disableFields: {
       type: Boolean,
       default: false
+    },
+    buttonEnabled: {
+      type: Boolean,
+      default: false
+    },
+    buttonCss: {
+      type: String,
+      default: "btn btn-default bg-gray-200"
     }
   },
   computed: {
@@ -115,6 +126,9 @@ export default {
     }
   },
   methods: {
+    button_onClick() {
+      this.$emit("button-onclick");
+    },
     handlePreset (c) {
       this.colorChange({
         hex: c,
@@ -275,5 +289,14 @@ export default {
 
 .vc-sketch__disable-alpha .vc-sketch-color-wrap {
   height: 10px;
+}
+
+/* Added by Riu Baring 8/2/2020 */
+.vc-sketch-buttons {
+  margin-right: -10px;
+  margin-left: -10px;
+  padding: 8px;
+  border-top: 1px solid #eee;
+  text-align: center;
 }
 </style>
